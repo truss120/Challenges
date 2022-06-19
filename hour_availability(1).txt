@@ -1,0 +1,27 @@
+## assumptions:
+## scheduling is between hours of 8-5 in the same time zone
+## blocks are scheduled in hour intervals
+
+## the following takes a list of users and times, returns list of available hour blocks
+
+def find_opening(sched):
+    avail = [8,9,10,11,12,13,14,15,16]  ## 8am-5pm work hours
+
+    for i in sched:         ## for User in list
+        tm = i[1:len(i)]    ## time values only
+
+        for j in tm:        ## for each block in time list
+            hrs = range(j[0],j[1])  ## get hours blocked
+
+            for hr in hrs:
+                if hr in avail: avail.remove(hr)
+        return avail
+
+
+if __name__ == '__main__':
+
+    lst = [['User1',[9,12],[10,11],[13,15],[14,16]],['User2',[9,11]]]
+
+    result = find_opening(lst)
+
+    print(result)
